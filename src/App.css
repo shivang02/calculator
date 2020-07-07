@@ -1,38 +1,119 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(45deg,#ec7690,#f17dd4,#a77bee,#77e7cf);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.display-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+   
 }
 
-.App-link {
-  color: #61dafb;
+.mini-display {
+  line-height: 5vh;
+  text-align: right;
+  background-color: black;
+  border: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.display {
+  line-height: 10vh;
+  text-align: right;
+  background-color: black;
+  border: none;
+}
+
+.calculator-box {
+ display: flex;
+ flex-direction: column;
+ width: 100vw;
+ height: 100vh;
+ 
+  
+}
+
+.key-grid{
+   display: grid;
+  grid-template-areas:
+  'clear clear clear mult'
+  'seven eight nine divide'
+  'four five six minus'
+  'one two three plus'
+  'zero decimal equals equals' ;
+  height: 100%;
+}
+
+.key-button {
+  padding: 1rem;
+  font-size: 2em;
+  background-color: rgba(240, 255, 255, 0.527);
+}
+
+.key-button:hover {
+  background-color: rgba(231, 180, 211, 0.616);
+}
+
+#one {
+  grid-area: one;
+}
+#two {
+  grid-area: two;
+}
+#three {
+  grid-area: three;
+}
+#four {
+  grid-area: four;
+}
+#five {
+  grid-area: five;
+}
+#six {
+  grid-area: six;
+}
+#seven {
+  grid-area: seven;
+}
+#eight {
+  grid-area: eight;
+}
+#nine {
+  grid-area: nine;
+}
+#clear {
+  grid-area: clear;
+}
+#add {
+  grid-area: plus;
+}
+#subtract {
+  grid-area: minus;
+}
+#divide {
+  grid-area: divide;
+}
+#multiply {
+  grid-area: mult;
+}
+#decimal {
+  grid-area: decimal;
+}
+#equals {
+  grid-area: equals;
+}
+
+
+@media only screen and (max-width:600px) {
+  
 }
