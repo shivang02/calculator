@@ -90,17 +90,17 @@ const newButtons= [
 
 class KeyPad extends Component {
     
-    CreateButton= () => {
-        let data=[]
-       newButtons.map((button) =>{
+    CreateButton = () => {
+        let data = []
+        newButtons.map((button) => {
             return (
                 data.push(<button id={button.id} value={button.value} className="key-button" onClick={this.keyPress}>{button.name}</button>)
             )
         })
         return data
     }
-    keyPress=(e)=>{
-        
+    keyPress = (e) => {
+
         this.props.handleKeyPress(e.target.value)
     }
     render() {
