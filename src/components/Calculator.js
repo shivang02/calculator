@@ -85,8 +85,10 @@ class Calculator extends Component{
             break
             case "=" ===val :
                 if (!(/[\+\-\*\/]/.test(prevDisplay[prevDisplay.length - 1]))) {
-                    prevDisplay=math.evaluate(prevDisplay)
-                    currentDisplay = math.evaluate(prevDisplay)
+                    
+                    let answer=math.evaluate(prevDisplay)
+                    prevDisplay=prevDisplay.concat("=").concat(answer.toString())
+                    currentDisplay = answer
                     this.setState({
                         newEvent:true
                     })
