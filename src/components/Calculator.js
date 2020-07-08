@@ -11,13 +11,29 @@ class Calculator extends Component{
              display:'0',
              miniDisplay:'0',
              canOperator: false,
-             canDecimal:true
+             canDecimal:true,
+             newEvent:false
         }
     }
 
     DisplayFormatter =(val) =>{
-        let currentDisplay=this.state.display
-        let prevDisplay= this.state.miniDisplay
+        let currentDisplay = this.state.display
+        let prevDisplay = this.state.miniDisplay
+        let canOperator=this.state.canOperator
+        let canDecimal= this.state.canDecimal
+        if(this.state.newEvent==true) {
+            this.setState({
+                display: '0',
+                miniDisplay: '0',
+                canOperator: false,
+                canDecimal: true,
+                newEvent: false
+            })
+            currentDisplay = '0'
+            prevDisplay = '0'
+        }
+        console.log(this.state.newEvent)
+        
         console.log(val)
         switch(true) {
             case /\d/.test(val) :
@@ -38,7 +54,7 @@ class Calculator extends Component{
                 }
             break
             case /[\+\-\*\/]/.test(val) :
-                if (this.state.canOperator&&!(/[\+\-\*\/]/.test(currentDisplay))) {      //meaning the penultimate character was not an operator
+                if (canOperator&&!(/[\+\-\*\/]/.test(currentDisplay))) {      //meaning the penultimate character was not an operator
                     currentDisplay=val
                     prevDisplay+=val
                     this.setState({
@@ -46,7 +62,7 @@ class Calculator extends Component{
                         canDecimal:true
                     })
                 }
-                else if (this.state.canOperator && (/[\+\-\*\/]/.test(currentDisplay))) {
+                else if (canOperator && (/[\+\-\*\/]/.test(currentDisplay))) {
                     currentDisplay=val
                     prevDisplay=prevDisplay.slice(0,prevDisplay.length-1)+val
                     this.setState({
@@ -56,7 +72,7 @@ class Calculator extends Component{
                 }
             break
             case'.'===val :
-                if(this.state.canDecimal){
+                if(canDecimal){
                     currentDisplay += val
                     prevDisplay+=val
                     this.setState({canDecimal:false})
@@ -71,6 +87,9 @@ class Calculator extends Component{
                 if (!(/[\+\-\*\/]/.test(prevDisplay[prevDisplay.length - 1]))) {
                     prevDisplay=math.evaluate(prevDisplay)
                     currentDisplay = math.evaluate(prevDisplay)
+                    this.setState({
+                        newEvent:true
+                    })
                 }
         }
         this.setState({
