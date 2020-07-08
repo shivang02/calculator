@@ -16,7 +16,8 @@ class Calculator extends Component{
             miniDisplay: 0,
             canOperator: false,
             canDecimal: true,
-            newEvent: false
+            newEvent: false,
+            operatorBag: ''
         };
     }
 
@@ -25,22 +26,31 @@ class Calculator extends Component{
         let prevDisplay = this.state.miniDisplay;
         let canOperator = this.state.canOperator;
         let canDecimal = this.state.canDecimal;
-        if (this.state.newEvent == true) {
-            this.setState({
-                display: 0,
-                miniDisplay: 0,
-                canOperator: false,
-                canDecimal: true,
-                newEvent: false
-            });
-            currentDisplay = 0;
-            prevDisplay = 0;
-        }
-        console.log(this.state.newEvent);
+        let operatorBag = this.state.operatorBag
 
-        console.log(val);
+
         switch (true) {
             case /\d/.test(val):
+                if (this.state.newEvent == true) {
+                    this.setState({
+                        display: 0,
+                        miniDisplay: 0,
+                        canOperator: false,
+                        canDecimal: true,
+                        newEvent: false,
+                        operatorBag: ''
+                    });
+                    currentDisplay = 0;
+                    prevDisplay = 0;
+                }
+                if (/^[\+\-\*\/]$|^[\*\/]\-$/.test(operatorBag)) {
+                    prevDisplay += operatorBag
+                    operatorBag = ''
+                }
+                else if (/^[\*\/\-\+]{2,}$/.test(operatorBag)) {
+                    prevDisplay += operatorBag[operatorBag.length - 1]
+                    operatorBag = ''
+                }
                 if (currentDisplay !== 0 && /\d/.test(currentDisplay)) {
                     if (currentDisplay[0] != 0) {
                         currentDisplay += val;
@@ -54,36 +64,37 @@ class Calculator extends Component{
                     this.setState({ canOperator: true });
                 } else {
                     currentDisplay = val != 0 ? val : 0;
+
                     prevDisplay = currentDisplay;
                     this.setState({ canOperator: true });
                 }
                 break;
             case /[\+\-\*\/]/.test(val):
+                if (this.state.newEvent == true) {
+                    this.setState({
+                        newEvent: false,
+                        operatorBag: ''
+                    });
+                    prevDisplay = currentDisplay;
+                    currentDisplay = 0;
+                }
                 if (canOperator && !/[\+\-\*\/]/.test(currentDisplay)) {
 
                     currentDisplay = val;
-                    prevDisplay += val;
+                    operatorBag += val
                     this.setState({
                         canOperator: true,
                         canDecimal: true
                     });
                 } else if (canOperator && /[\+\-\*\/]/.test(currentDisplay)) {
-                    if (val == '-') {
-                        currentDisplay += val;
-                        prevDisplay += val;
-                        this.setState({
-                            canOperator: true,
-                            canDecimal: true
-                        });
-                    }
-                    else {
-                        currentDisplay = val;
-                        prevDisplay = prevDisplay.slice(0, prevDisplay.length - 1) + val;
-                        this.setState({
-                            canOperator: true,
-                            canDecimal: true
-                        });
-                    }
+
+                    currentDisplay += val;
+                    operatorBag += val
+                    this.setState({
+                        canOperator: true,
+                        canDecimal: true
+                    });
+
                 }
                 break;
             case "." === val:
@@ -101,7 +112,7 @@ class Calculator extends Component{
                     miniDisplay: 0,
                     canOperator: false,
                     canDecimal: true,
-                    newEvent: false
+                    newEvent: false,
                 });
                 break;
             case "=" === val:
@@ -116,7 +127,8 @@ class Calculator extends Component{
         }
         this.setState({
             display: currentDisplay,
-            miniDisplay: prevDisplay
+            miniDisplay: prevDisplay,
+            operatorBag: operatorBag
         });
     };
 
@@ -132,5 +144,4 @@ class Calculator extends Component{
         );
     }
 }
-
 export default Calculator
