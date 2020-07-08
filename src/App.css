@@ -5,6 +5,7 @@
 }
 
 .App {
+ 
   display: flex;
   flex-direction: row;
   margin: 0;
@@ -21,14 +22,20 @@
 }
 
 .mini-display {
+   font-family: 'Orbitron', sans-serif;
   line-height: 5vh;
   text-align: right;
+  color: orange;
   background-color: black;
   border: none;
 }
 
 .display {
+   font-family: 'Orbitron', sans-serif;
   line-height: 10vh;
+  color: orange;
+  font-size: 3rem;
+  padding: 0 1rem 0 1rem;
   text-align: right;
   background-color: black;
   border: none;
@@ -58,10 +65,11 @@
   padding: 1rem;
   font-size: 2em;
   background-color: rgba(240, 255, 255, 0.527);
+  cursor: pointer;
 }
 
 .key-button:hover {
-  background-color: rgba(231, 180, 211, 0.616);
+  background-color: rgba(141, 236, 222, 0.616);
 }
 
 #one {
@@ -93,7 +101,13 @@
 }
 #clear {
   grid-area: clear;
+  
 }
+
+#clear:hover {
+  background-color: rgba(233, 40, 40, 0.432);
+}
+
 #add {
   grid-area: plus;
 }

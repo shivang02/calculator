@@ -8,7 +8,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener("click",this.handleKeyPress)
+    let [...h]= document.getElementsByClassName("key-button")
+    h.map((eachButton)=> {
+      eachButton.addEventListener("click",this.handleKeyPress);
+    })
   }
 
   handleKeyPress =(e) =>{

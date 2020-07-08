@@ -73,7 +73,7 @@ const newButtons= [
     }, 
     {
         id: 'clear',
-        value: '',
+        value: ' ',
         name: 'AC'
     }, 
     {
@@ -94,12 +94,15 @@ class KeyPad extends Component {
         let data=[]
        newButtons.map((button) =>{
             return (
-                data.push(<button id={button.id} value={button.id} className="key-button">{button.name}</button>)
+                data.push(<button id={button.id} value={button.value} className="key-button" onClick={this.keyPress}>{button.name}</button>)
             )
         })
         return data
     }
-
+    keyPress=(e)=>{
+        
+        this.props.handleKeyPress(e.target.value)
+    }
     render() {
         return (
             <div className="key-grid">

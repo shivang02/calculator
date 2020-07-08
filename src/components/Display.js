@@ -9,8 +9,8 @@ class Display extends Component {
     render() {
         return (
             <div className="display-container">
-                <input readOnly className="mini-display" value={this.props.values.miniDisplay} />
-                <input readOnly className="display" value={this.props.values.Display} />
+                <input readOnly className="mini-display" value={this.props.miniDisplay} />
+                <input readOnly className="display" value={this.props.display} />
             </div>
         )
     }
