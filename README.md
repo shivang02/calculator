@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Calculator
 This is a standard calculator made using React.js and Math.js.
 This calculator can be used for the following operations-
-1)Addition
-2)Subtraction
-3)Multiplication
-4)Division
+<ol>Addition</ol>
+<ol>2)Subtraction</ol>
+<ol>Multiplication</ol>
+<ol>4)Division</ol>
